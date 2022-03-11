@@ -1,10 +1,12 @@
 using Steamworks;
 using System.Net;
+using SteamUtils.Models;
 
 namespace SteamUtils
 {
     public partial class MainForm : Form
     {
+        private User? _user;
         private List<Friend>? _friends;
 
         public MainForm()
@@ -14,28 +16,36 @@ namespace SteamUtils
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            if (!File.Exists($@"{Environment.CurrentDirectory}\steam_api64.dll")) DownloadSteamApi(@"https://drive.google.com/file/d/1wFTqpfST2Sm8XKbvyVts4TOg-Jmk9EPq/view?usp=sharing");
+            if (!File.Exists($@"{Environment.CurrentDirectory}\steam_api64.dll")) DownloadSteamApi(@"https://github.com/Facepunch/Facepunch.Steamworks/blob/master/Facepunch.Steamworks/steam_api64.dll");
 
-            /*SteamClient.Init(730);
+            _user = new User();
 
-            _friends = SteamFriends.GetFriends().ToList();
-
-            string friends = string.Empty;
-
-            _friends.ToList().ForEach(x => friends += $"\n{x.Name}");
-
-            MessageBox.Show(friends);*/
+            MessageBox.Show("Select game", "Message", MessageBoxButtons.OK);
         }
 
         private void DownloadSteamApi(string link)
         {
             using (var client = new WebClient())
             {
-                client.DownloadProgressChanged += OnDownloadProgressChanged;
                 client.DownloadFileAsync(new Uri(link), $@"{Environment.CurrentDirectory}\steam_api64.dll");
             }
         }
 
-        private void OnDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e) => progressBarDownload.Value = e.ProgressPercentage;
+        private void comboBoxGame_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _user.SetAppId(comboBoxGame.SelectedItem.ToString());
+
+            SteamClient.Init(_user.AppId);
+            labelUserName.Text = SteamClient.Name;
+            labelUserState.Text = SteamClient.State.ToString();
+
+            if(labelUserState.Text == "Online") labelUserState.ForeColor = Color.Green;
+
+            comboBoxGame.Visible = false;
+
+            _friends = SteamFriends.GetFriends().ToList();
+
+            _friends.ForEach(f => listBoxFriends.Items.Add($"{f.Name}({f.Id}) {f.State}"));
+        }
     }
 }
