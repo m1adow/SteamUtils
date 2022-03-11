@@ -33,6 +33,11 @@
             this.comboBoxGame = new System.Windows.Forms.ComboBox();
             this.listBoxFriends = new System.Windows.Forms.ListBox();
             this.labelFriends = new System.Windows.Forms.Label();
+            this.textBoxMessage = new System.Windows.Forms.TextBox();
+            this.labelMessage = new System.Windows.Forms.Label();
+            this.textBoxCount = new System.Windows.Forms.TextBox();
+            this.labelCount = new System.Windows.Forms.Label();
+            this.buttonSend = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelUserName
@@ -72,7 +77,7 @@
             this.listBoxFriends.ItemHeight = 15;
             this.listBoxFriends.Location = new System.Drawing.Point(12, 24);
             this.listBoxFriends.Name = "listBoxFriends";
-            this.listBoxFriends.Size = new System.Drawing.Size(397, 424);
+            this.listBoxFriends.Size = new System.Drawing.Size(397, 409);
             this.listBoxFriends.TabIndex = 6;
             // 
             // labelFriends
@@ -80,15 +85,62 @@
             this.labelFriends.AutoSize = true;
             this.labelFriends.Location = new System.Drawing.Point(12, 6);
             this.labelFriends.Name = "labelFriends";
-            this.labelFriends.Size = new System.Drawing.Size(45, 15);
+            this.labelFriends.Size = new System.Drawing.Size(72, 15);
             this.labelFriends.TabIndex = 7;
-            this.labelFriends.Text = "Friends";
+            this.labelFriends.Text = "Select friend";
+            // 
+            // textBoxMessage
+            // 
+            this.textBoxMessage.Location = new System.Drawing.Point(427, 44);
+            this.textBoxMessage.Name = "textBoxMessage";
+            this.textBoxMessage.Size = new System.Drawing.Size(188, 23);
+            this.textBoxMessage.TabIndex = 8;
+            // 
+            // labelMessage
+            // 
+            this.labelMessage.AutoSize = true;
+            this.labelMessage.Location = new System.Drawing.Point(427, 26);
+            this.labelMessage.Name = "labelMessage";
+            this.labelMessage.Size = new System.Drawing.Size(84, 15);
+            this.labelMessage.TabIndex = 9;
+            this.labelMessage.Text = "Write message";
+            // 
+            // textBoxCount
+            // 
+            this.textBoxCount.Location = new System.Drawing.Point(633, 44);
+            this.textBoxCount.Name = "textBoxCount";
+            this.textBoxCount.Size = new System.Drawing.Size(100, 23);
+            this.textBoxCount.TabIndex = 10;
+            // 
+            // labelCount
+            // 
+            this.labelCount.AutoSize = true;
+            this.labelCount.Location = new System.Drawing.Point(633, 24);
+            this.labelCount.Name = "labelCount";
+            this.labelCount.Size = new System.Drawing.Size(69, 15);
+            this.labelCount.TabIndex = 11;
+            this.labelCount.Text = "Write count";
+            // 
+            // buttonSend
+            // 
+            this.buttonSend.Location = new System.Drawing.Point(427, 73);
+            this.buttonSend.Name = "buttonSend";
+            this.buttonSend.Size = new System.Drawing.Size(306, 47);
+            this.buttonSend.TabIndex = 12;
+            this.buttonSend.Text = "Send";
+            this.buttonSend.UseVisualStyleBackColor = true;
+            this.buttonSend.Click += new System.EventHandler(this.buttonSend_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonSend);
+            this.Controls.Add(this.labelCount);
+            this.Controls.Add(this.textBoxCount);
+            this.Controls.Add(this.labelMessage);
+            this.Controls.Add(this.textBoxMessage);
             this.Controls.Add(this.labelFriends);
             this.Controls.Add(this.listBoxFriends);
             this.Controls.Add(this.comboBoxGame);
@@ -108,5 +160,10 @@
         private ComboBox comboBoxGame;
         private ListBox listBoxFriends;
         private Label labelFriends;
+        private TextBox textBoxMessage;
+        private Label labelMessage;
+        private TextBox textBoxCount;
+        private Label labelCount;
+        private Button buttonSend;
     }
 }
