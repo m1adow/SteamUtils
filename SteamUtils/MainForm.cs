@@ -16,6 +16,8 @@ namespace SteamUtils
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            SetVisibleControls(false); //set invisible all controls
+            
             if (!File.Exists($@"{Environment.CurrentDirectory}\steam_api64.dll")) DownloadSteamApi(@"https://github.com/Facepunch/Facepunch.Steamworks/blob/master/Facepunch.Steamworks/steam_api64.dll");
 
             _user = new User();
@@ -46,23 +48,79 @@ namespace SteamUtils
             _friends.ForEach(f => listBoxFriends.Items.Add($"{f.Name}({f.Id}) {f.State}")); //display friends
         }
 
-        private void buttonSend_Click(object sender, EventArgs e)
+        private async void buttonSend_Click(object sender, EventArgs e) => await SendMessages("message");
+
+        private async void buttonInvite_Click(object sender, EventArgs e) => await SendMessages("invite");
+
+        private void radioButtonSendMessage_CheckedChanged(object sender, EventArgs e)
         {
-            if (textBoxCount.Text.Any(c => !char.IsDigit(c))) MessageBox.Show("Second text box must contains only digits"); //examination for containing letters
+            SetVisibleControls(true);
+            radioButtonSendInviteToGame.Checked = false;
+            buttonInvite.Visible = false;
+        }
 
+        private void radioButtonSendInviteToGame_CheckedChanged(object sender, EventArgs e)
+        {
+            SetVisibleControls(true);
+            radioButtonSendMessage.Checked = false;
+            buttonMessage.Visible = true;
+        }
+
+        private void SetVisibleControls(bool isVisible)
+        {           
+            //text boxes
+            textBoxCount.Visible = isVisible;
+            textBoxDelay.Visible = isVisible;
+            textBoxMessage.Visible = isVisible;
+
+            //buttons
+            buttonMessage.Visible = isVisible;
+            buttonInvite.Visible = isVisible;
+
+            //labels 
+            labelCount.Visible = isVisible;
+            labelDelay.Visible = isVisible;
+            labelMessage.Visible = isVisible;
+        }
+
+        private void ResetTextBoxes()
+        {
+            textBoxDelay.Text = "0";
+            textBoxCount.Text = "1";
+            textBoxMessage.Text = string.Empty;
+            listBoxFriends.SelectedIndex = -1;
+        }
+
+        private async Task SendMessages(string way)
+        {
             string listBoxSelectedItem = listBoxFriends.SelectedItem.ToString(); //string with selected string
-            string name = string.Empty;
 
-            //getting friend name from listBox
-            for (int i = 0; i < listBoxSelectedItem.Length; i++)
+            await Task.Run(() =>
             {
-                if (listBoxSelectedItem[i] != '(') name += listBoxSelectedItem[i];
-                else i = listBoxSelectedItem.Length + 1;
-            }
+                if (textBoxCount.Text.Any(c => !char.IsDigit(c)) || textBoxDelay.Text.Any(c => !char.IsDigit(c))) MessageBox.Show("Second and third text boxes must contains only digits"); //examination for containing letters
 
-            Friend friend = _friends.FirstOrDefault(f => f.Name == name); //getting friend
+                string name = string.Empty;
 
-            for (int i = 0; i < int.Parse(textBoxCount.Text); i++) friend.SendMessage(textBoxMessage.Text); //send messages
+                //getting friend name from listBox
+                for (int i = 0; i < listBoxSelectedItem.Length; i++)
+                {
+                    if (listBoxSelectedItem[i] != '(') name += listBoxSelectedItem[i];
+                    else i = listBoxSelectedItem.Length + 1;
+                }
+
+                Friend friend = _friends.FirstOrDefault(f => f.Name == name); //getting friend
+
+                for (int i = 0; i < int.Parse(textBoxCount.Text); i++)
+                {                   
+                    if(way == "invite") friend.InviteToGame(textBoxMessage.Text); //send invite
+                    else if(way == "message") friend.SendMessage(textBoxMessage.Text); //send message
+
+                    Thread.Sleep(TimeSpan.FromSeconds(int.Parse(textBoxDelay.Text))); //set delay
+                }
+            });
+
+
+            ResetTextBoxes(); //clear data
         }
     }
 }

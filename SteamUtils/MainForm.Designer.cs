@@ -37,7 +37,13 @@
             this.labelMessage = new System.Windows.Forms.Label();
             this.textBoxCount = new System.Windows.Forms.TextBox();
             this.labelCount = new System.Windows.Forms.Label();
-            this.buttonSend = new System.Windows.Forms.Button();
+            this.buttonMessage = new System.Windows.Forms.Button();
+            this.textBoxDelay = new System.Windows.Forms.TextBox();
+            this.labelDelay = new System.Windows.Forms.Label();
+            this.buttonInvite = new System.Windows.Forms.Button();
+            this.radioButtonSendMessage = new System.Windows.Forms.RadioButton();
+            this.radioButtonSendInviteToGame = new System.Windows.Forms.RadioButton();
+            this.labelMode = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelUserName
@@ -93,13 +99,13 @@
             // 
             this.textBoxMessage.Location = new System.Drawing.Point(427, 44);
             this.textBoxMessage.Name = "textBoxMessage";
-            this.textBoxMessage.Size = new System.Drawing.Size(188, 23);
+            this.textBoxMessage.Size = new System.Drawing.Size(306, 23);
             this.textBoxMessage.TabIndex = 8;
             // 
             // labelMessage
             // 
             this.labelMessage.AutoSize = true;
-            this.labelMessage.Location = new System.Drawing.Point(427, 26);
+            this.labelMessage.Location = new System.Drawing.Point(427, 24);
             this.labelMessage.Name = "labelMessage";
             this.labelMessage.Size = new System.Drawing.Size(84, 15);
             this.labelMessage.TabIndex = 9;
@@ -107,36 +113,105 @@
             // 
             // textBoxCount
             // 
-            this.textBoxCount.Location = new System.Drawing.Point(633, 44);
+            this.textBoxCount.Location = new System.Drawing.Point(427, 85);
             this.textBoxCount.Name = "textBoxCount";
             this.textBoxCount.Size = new System.Drawing.Size(100, 23);
             this.textBoxCount.TabIndex = 10;
+            this.textBoxCount.Text = "1";
             // 
             // labelCount
             // 
             this.labelCount.AutoSize = true;
-            this.labelCount.Location = new System.Drawing.Point(633, 24);
+            this.labelCount.Location = new System.Drawing.Point(427, 67);
             this.labelCount.Name = "labelCount";
             this.labelCount.Size = new System.Drawing.Size(69, 15);
             this.labelCount.TabIndex = 11;
             this.labelCount.Text = "Write count";
             // 
-            // buttonSend
+            // buttonMessage
             // 
-            this.buttonSend.Location = new System.Drawing.Point(427, 73);
-            this.buttonSend.Name = "buttonSend";
-            this.buttonSend.Size = new System.Drawing.Size(306, 47);
-            this.buttonSend.TabIndex = 12;
-            this.buttonSend.Text = "Send";
-            this.buttonSend.UseVisualStyleBackColor = true;
-            this.buttonSend.Click += new System.EventHandler(this.buttonSend_Click);
+            this.buttonMessage.Location = new System.Drawing.Point(551, 84);
+            this.buttonMessage.Name = "buttonMessage";
+            this.buttonMessage.Size = new System.Drawing.Size(57, 23);
+            this.buttonMessage.TabIndex = 12;
+            this.buttonMessage.Text = "Send";
+            this.buttonMessage.UseVisualStyleBackColor = true;
+            this.buttonMessage.Click += new System.EventHandler(this.buttonSend_Click);
+            // 
+            // textBoxDelay
+            // 
+            this.textBoxDelay.Location = new System.Drawing.Point(633, 85);
+            this.textBoxDelay.Name = "textBoxDelay";
+            this.textBoxDelay.Size = new System.Drawing.Size(100, 23);
+            this.textBoxDelay.TabIndex = 13;
+            this.textBoxDelay.Text = "0";
+            // 
+            // labelDelay
+            // 
+            this.labelDelay.AutoSize = true;
+            this.labelDelay.Location = new System.Drawing.Point(633, 67);
+            this.labelDelay.Name = "labelDelay";
+            this.labelDelay.Size = new System.Drawing.Size(66, 15);
+            this.labelDelay.TabIndex = 14;
+            this.labelDelay.Text = "Write delay";
+            // 
+            // buttonInvite
+            // 
+            this.buttonInvite.Location = new System.Drawing.Point(551, 85);
+            this.buttonInvite.Name = "buttonInvite";
+            this.buttonInvite.Size = new System.Drawing.Size(57, 23);
+            this.buttonInvite.TabIndex = 15;
+            this.buttonInvite.Text = "Invite";
+            this.buttonInvite.UseVisualStyleBackColor = true;
+            this.buttonInvite.Click += new System.EventHandler(this.buttonInvite_Click);
+            // 
+            // radioButtonSendMessage
+            // 
+            this.radioButtonSendMessage.AutoSize = true;
+            this.radioButtonSendMessage.Location = new System.Drawing.Point(427, 416);
+            this.radioButtonSendMessage.Name = "radioButtonSendMessage";
+            this.radioButtonSendMessage.Size = new System.Drawing.Size(100, 19);
+            this.radioButtonSendMessage.TabIndex = 16;
+            this.radioButtonSendMessage.TabStop = true;
+            this.radioButtonSendMessage.Text = "Send message";
+            this.radioButtonSendMessage.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.radioButtonSendMessage.UseVisualStyleBackColor = true;
+            this.radioButtonSendMessage.CheckedChanged += new System.EventHandler(this.radioButtonSendMessage_CheckedChanged);
+            // 
+            // radioButtonSendInviteToGame
+            // 
+            this.radioButtonSendInviteToGame.AutoSize = true;
+            this.radioButtonSendInviteToGame.Location = new System.Drawing.Point(533, 416);
+            this.radioButtonSendInviteToGame.Name = "radioButtonSendInviteToGame";
+            this.radioButtonSendInviteToGame.Size = new System.Drawing.Size(130, 19);
+            this.radioButtonSendInviteToGame.TabIndex = 17;
+            this.radioButtonSendInviteToGame.TabStop = true;
+            this.radioButtonSendInviteToGame.Text = "Send invite to game";
+            this.radioButtonSendInviteToGame.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.radioButtonSendInviteToGame.UseVisualStyleBackColor = true;
+            this.radioButtonSendInviteToGame.CheckedChanged += new System.EventHandler(this.radioButtonSendInviteToGame_CheckedChanged);
+            // 
+            // labelMode
+            // 
+            this.labelMode.AutoSize = true;
+            this.labelMode.Location = new System.Drawing.Point(496, 398);
+            this.labelMode.Name = "labelMode";
+            this.labelMode.Size = new System.Drawing.Size(81, 15);
+            this.labelMode.TabIndex = 18;
+            this.labelMode.Text = "Choose mode";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.buttonSend);
+            this.Controls.Add(this.labelMode);
+            this.Controls.Add(this.radioButtonSendInviteToGame);
+            this.Controls.Add(this.radioButtonSendMessage);
+            this.Controls.Add(this.buttonInvite);
+            this.Controls.Add(this.labelDelay);
+            this.Controls.Add(this.textBoxDelay);
+            this.Controls.Add(this.buttonMessage);
             this.Controls.Add(this.labelCount);
             this.Controls.Add(this.textBoxCount);
             this.Controls.Add(this.labelMessage);
@@ -164,6 +239,12 @@
         private Label labelMessage;
         private TextBox textBoxCount;
         private Label labelCount;
-        private Button buttonSend;
+        private Button buttonMessage;
+        private TextBox textBoxDelay;
+        private Label labelDelay;
+        private Button buttonInvite;
+        private RadioButton radioButtonSendMessage;
+        private RadioButton radioButtonSendInviteToGame;
+        private Label labelMode;
     }
 }
